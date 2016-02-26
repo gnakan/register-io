@@ -1,0 +1,20 @@
+{
+  "name": "register-io",
+  "version": "1.0.0",
+  "description": "Web application for managing project stakeholders",
+  "main": "registerServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:gnakan/register-io.git"
+  },
+  "author": "Gary Nakanelua",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.12.4",
+    "express": "^4.12.4",
+    "mongoose": "^4.0.5"
+  }
+}

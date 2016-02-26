@@ -1,0 +1,107 @@
+<!doctype html>
+<html ng-app="registerIO">
+
+<head>
+    <title>Register.IO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
+    <meta name="viewport" content="initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body ng-controller="mainController">
+    <nav class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#"> <i class="fa fa-street-view"></i> Register.IO</a>
+    </nav>
+    <div class='container search-area'>
+        <h4>Mango Fluff Martini Project</h4>
+        <div class='col-md-8 col-md-offset-2'>
+            <h3>WHO DO I TALK TO ABOUT</h3>
+            <form role="search">
+                <div class="input-group">
+                    <input id='searchBox' type="text" class="form-control" placeholder="" ng-model="search.term" ng-keyup='searchStakeholders(search.term)'>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div  class='search-results'>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th class='table-img'></th>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='result in searchResults'>
+                            <td><img ng-if="result.image" class="img-circle" src={{result.image}} /></td>
+                            <td class='result-name'>{{result.firstName}} {{result.lastName}}</td>
+                            <td>{{result.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class='stakeholder-list'>
+        <div class='col-md-8'>
+            <h4>{{ stakeholders.length }} project stakeholders</h4>
+        </div>
+        <div class='col-md-4'>
+            <div class='stakeholder-add pull-right' ng-click='addStakeholder()'>
+                <i class="fa fa-plus-circle fa-4x"></i>Add stakeholder
+            </div>
+        </div>
+        <div ng-repeat='stakeholder in stakeholders' class='col-md-4'>
+            <div class='stakeholder-card blue'>
+                <div ng-if="stakeholder.image">
+                    <img class="img-circle" src={{stakeholder.image}} />
+                </div>
+                <div ng-if="!stakeholder.image">
+                    <img class="img-circle" src="http://spectroscopy.kaust.edu.sa/PublishingImages/icon_profile_unknown_300x300.png" />
+                </div>
+                <div class='card-banner'>
+                    <h3>{{stakeholder.firstName}} {{stakeholder.middleName}}</h3>
+                    <h3>{{stakeholder.lastName}}</h3>
+                </div>
+                <div class='card-social-nav'>
+                    <span ng-if="stakeholder.email">
+                    <a href='mailto:{{stakeholder.email}}'><i class="fa fa-envelope-o fa-2x"></i></a>
+                </span>
+                    <span ng-if="stakeholder.skype">
+                    <a href='skype:{{stakeholder.skype}}?call'><i class="fa fa-skype fa-2x"></i></a>
+                </span>
+                    <span ng-if="stakeholder.twitter">
+                    <a href='http://twitter.com/{{stakeholder.twitter}}'><i class="fa fa-twitter fa-2x"></i></a>
+                </span>
+                </div>
+                <div class='card-role' ng-if="stakeholder.role || stakeholder.group">
+                    <div class='col-md-6' ng-if="stakeholder.role">
+                        <div class='role-entry'>
+                            <h2>ROLE</h2>
+                            <h4>{{stakeholder.role}}</h4>
+                        </div>
+                    </div>
+                    <div class='col-md-6' ng-if="stakeholder.group">
+                        <div class='role-entry'>
+                            <h2>GROUP</h2>
+                            <h4>{{stakeholder.group}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class='card-notes' ng-if="stakeholder.notes">
+                    {{stakeholder.notes}}
+                </div>
+                <div class='card-tags'></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
